@@ -7,3 +7,12 @@
 //
 
 import Foundation
+
+protocol CollectionDataProvider: class {
+    var delegate: CollectionDataProviderDelegate? { get set }
+    
+}
+
+protocol CollectionDataProviderDelegate: class {
+    
+}

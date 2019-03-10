@@ -28,6 +28,16 @@ class MapViewModel: NSObject {
     func loadPins() {
         dataProvider.fetchData()
     }
+    
+    func savePin(latitude: String, longitude: String) {
+        let model = PinModel(coordinates: PinModel.Coordinates(latitude: latitude, longitude: longitude))
+        dataProvider.saveData(model)
+    }
+    
+    func removePin(latitude: String, longitude: String) {
+        let model = PinModel(coordinates: PinModel.Coordinates(latitude: latitude, longitude: longitude))
+        dataProvider.deleteData(model)
+    }
 }
 
 extension MapViewModel: MapDataProviderDelegate {

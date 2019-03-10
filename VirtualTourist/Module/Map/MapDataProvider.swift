@@ -11,6 +11,8 @@ import Foundation
 protocol MapDataProvider: class {
     var delegate: MapDataProviderDelegate? { get set }
     func fetchData()
+    func saveData(_ pinModel: PinModel)
+    func deleteData(_ pinModel: PinModel)
 }
 
 protocol MapDataProviderDelegate: class {

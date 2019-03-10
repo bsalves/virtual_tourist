@@ -48,9 +48,9 @@ class MapDataLocal: MapDataProvider {
         return pin
     }
     
-    func deleteData(latitude: String, longitude: String) {
+    func deleteData(_ pinModel: PinModel) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Pin")
-        fetchRequest.predicate = NSPredicate(format: "latitude = %@ AND longitude = %@", latitude, longitude)
+        fetchRequest.predicate = NSPredicate(format: "latitude = %@ AND longitude = %@", pinModel.coordinates.latitude, pinModel.coordinates.longitude)
         fetchRequest.fetchLimit = 1
         
         do {

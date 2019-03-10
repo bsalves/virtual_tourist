@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HUf-4k-DKP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HUf-4k-DKP">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -34,13 +34,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="itx-c6-fN7">
-                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="607"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z1s-Od-GXg">
-                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z1s-Od-GXg">
+                                <rect key="frame" x="0.0" y="607" width="375" height="60"/>
                                 <color key="backgroundColor" red="0.83529411760000005" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="jYa-Om-9xr"/>
+                                    <constraint firstAttribute="height" constant="60" id="jYa-Om-9xr"/>
                                 </constraints>
                                 <state key="normal" title="Delete Pin">
                                     <color key="titleColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -54,18 +54,23 @@
                             <constraint firstItem="Z1s-Od-GXg" firstAttribute="top" secondItem="itx-c6-fN7" secondAttribute="bottom" id="OkE-gt-Jn3"/>
                             <constraint firstItem="7e4-hC-IAo" firstAttribute="trailing" secondItem="Z1s-Od-GXg" secondAttribute="trailing" id="Yw8-tN-C3r"/>
                             <constraint firstItem="itx-c6-fN7" firstAttribute="leading" secondItem="7e4-hC-IAo" secondAttribute="leading" id="iuh-xF-qyF"/>
-                            <constraint firstItem="itx-c6-fN7" firstAttribute="top" secondItem="7e4-hC-IAo" secondAttribute="top" id="kZL-rx-owB"/>
+                            <constraint firstItem="itx-c6-fN7" firstAttribute="top" secondItem="iyV-Ep-YdV" secondAttribute="top" id="kZL-rx-owB"/>
                             <constraint firstItem="Z1s-Od-GXg" firstAttribute="leading" secondItem="7e4-hC-IAo" secondAttribute="leading" id="wrH-ad-teB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7e4-hC-IAo"/>
                     </view>
                     <navigationItem key="navigationItem" title="Virtual Tourist" id="lLT-pP-4ji">
-                        <barButtonItem key="rightBarButtonItem" title="Editar" id="TT7-rl-bah"/>
+                        <barButtonItem key="rightBarButtonItem" title="Editar" id="TT7-rl-bah">
+                            <connections>
+                                <action selector="editPins:" destination="6Jt-NF-BjL" id="O5o-u2-BNu"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="deletePinButtonHeightContraint" destination="jYa-Om-9xr" id="zfM-vs-cNz"/>
                         <outlet property="editButton" destination="TT7-rl-bah" id="BA1-4R-LMe"/>
                         <outlet property="map" destination="itx-c6-fN7" id="c4a-Bo-hN5"/>
+                        <outlet property="mapTopAncorContraint" destination="kZL-rx-owB" id="gp8-UV-UZf"/>
                         <segue destination="9ru-bS-CtK" kind="show" identifier="collectionSegue" id="myx-6y-yBv"/>
                     </connections>
                 </viewController>
@@ -73,10 +78,10 @@
             </objects>
             <point key="canvasLocation" x="604" y="29"/>
         </scene>
-        <!--View Controller-->
+        <!--Collection View Controller-->
         <scene sceneID="FdG-Ot-wh5">
             <objects>
-                <viewController id="9ru-bS-CtK" sceneMemberID="viewController">
+                <viewController id="9ru-bS-CtK" customClass="CollectionViewController" customModule="VirtualTourist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kGn-cu-uz9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
