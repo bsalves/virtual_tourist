@@ -31,6 +31,10 @@ class MapViewModel: NSObject {
 }
 
 extension MapViewModel: MapDataProviderDelegate {
+    func pinRemoved(_ remainingPins: [PinModel]) {
+        delegate?.viewModel(self, didLoaded: remainingPins)
+    }
+    
     func mapData(_ mapData: MapDataProvider, didFinishedLoad pins: [PinModel]) {
         delegate?.viewModel(self, didLoaded: pins)
     }

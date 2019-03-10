@@ -15,14 +15,5 @@ protocol MapDataProvider: class {
 
 protocol MapDataProviderDelegate: class {
     func mapData(_ mapData: MapDataProvider, didFinishedLoad pins: [PinModel])
-}
-
-class MapDataLocal: MapDataProvider {
-    
-    weak var delegate: MapDataProviderDelegate?
-    
-    func fetchData() {
-        // Do what need to do
-        delegate?.mapData(self, didFinishedLoad: [])
-    }
+    func pinRemoved(_ remainingPins: [PinModel])
 }

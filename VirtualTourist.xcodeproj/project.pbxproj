@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		39591CE122359A53000C30C3 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39591CE022359A53000C30C3 /* CollectionViewController.swift */; };
+		39591CE322359A66000C30C3 /* CollectionDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39591CE222359A66000C30C3 /* CollectionDataProvider.swift */; };
+		39591CE522359A72000C30C3 /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39591CE422359A72000C30C3 /* CollectionViewModel.swift */; };
+		39591CE722359DBF000C30C3 /* MapDataLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39591CE622359DBF000C30C3 /* MapDataLocal.swift */; };
+		39591CEB2235A906000C30C3 /* PinsLocalDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39591CEA2235A906000C30C3 /* PinsLocalDataTests.swift */; };
 		F27536EE222841F000AEF6B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27536ED222841F000AEF6B2 /* AppDelegate.swift */; };
 		F27536F3222841F000AEF6B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F27536F1222841F000AEF6B2 /* Main.storyboard */; };
 		F27536F6222841F000AEF6B2 /* VirtualTourist.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F27536F4222841F000AEF6B2 /* VirtualTourist.xcdatamodeld */; };
@@ -38,6 +43,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		39591CE022359A53000C30C3 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		39591CE222359A66000C30C3 /* CollectionDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDataProvider.swift; sourceTree = "<group>"; };
+		39591CE422359A72000C30C3 /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
+		39591CE622359DBF000C30C3 /* MapDataLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDataLocal.swift; sourceTree = "<group>"; };
+		39591CEA2235A906000C30C3 /* PinsLocalDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsLocalDataTests.swift; sourceTree = "<group>"; };
 		F27536EA222841F000AEF6B2 /* VirtualTourist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtualTourist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F27536ED222841F000AEF6B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F27536F2222841F000AEF6B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -82,6 +92,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		39591CDF22359A43000C30C3 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				39591CE022359A53000C30C3 /* CollectionViewController.swift */,
+				39591CE222359A66000C30C3 /* CollectionDataProvider.swift */,
+				39591CE422359A72000C30C3 /* CollectionViewModel.swift */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
 		F27536E1222841F000AEF6B2 = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +142,7 @@
 			children = (
 				F2753705222841F300AEF6B2 /* VirtualTouristTests.swift */,
 				F2753707222841F300AEF6B2 /* Info.plist */,
+				39591CEA2235A906000C30C3 /* PinsLocalDataTests.swift */,
 			);
 			path = VirtualTouristTests;
 			sourceTree = "<group>";
@@ -138,7 +159,7 @@
 		F275371E2228440000AEF6B2 /* Module */ = {
 			isa = PBXGroup;
 			children = (
-				F27537202228441600AEF6B2 /* Collection */,
+				39591CDF22359A43000C30C3 /* Collection */,
 				F275371F2228440600AEF6B2 /* Map */,
 			);
 			path = Module;
@@ -150,15 +171,9 @@
 				F27537212228449C00AEF6B2 /* MapViewController.swift */,
 				F2753723222845A100AEF6B2 /* MapDataProvider.swift */,
 				F2753725222845FE00AEF6B2 /* MapViewModel.swift */,
+				39591CE622359DBF000C30C3 /* MapDataLocal.swift */,
 			);
 			path = Map;
-			sourceTree = "<group>";
-		};
-		F27537202228441600AEF6B2 /* Collection */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Collection;
 			sourceTree = "<group>";
 		};
 		F27537272228461B00AEF6B2 /* Model */ = {
@@ -300,10 +315,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39591CE322359A66000C30C3 /* CollectionDataProvider.swift in Sources */,
 				F27536EE222841F000AEF6B2 /* AppDelegate.swift in Sources */,
 				F2753729222846D100AEF6B2 /* PinModel.swift in Sources */,
 				F2753726222845FE00AEF6B2 /* MapViewModel.swift in Sources */,
+				39591CE722359DBF000C30C3 /* MapDataLocal.swift in Sources */,
 				F27537222228449C00AEF6B2 /* MapViewController.swift in Sources */,
+				39591CE122359A53000C30C3 /* CollectionViewController.swift in Sources */,
+				39591CE522359A72000C30C3 /* CollectionViewModel.swift in Sources */,
 				F27536F6222841F000AEF6B2 /* VirtualTourist.xcdatamodeld in Sources */,
 				F2753724222845A100AEF6B2 /* MapDataProvider.swift in Sources */,
 			);
@@ -314,6 +333,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2753706222841F300AEF6B2 /* VirtualTouristTests.swift in Sources */,
+				39591CEB2235A906000C30C3 /* PinsLocalDataTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,7 +431,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -466,7 +486,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
