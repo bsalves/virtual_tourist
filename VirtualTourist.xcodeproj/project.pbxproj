@@ -136,6 +136,7 @@
 		F27536EC222841F000AEF6B2 /* VirtualTourist */ = {
 			isa = PBXGroup;
 			children = (
+				F2E28790223C4786001B3287 /* UseCases */,
 				F27537272228461B00AEF6B2 /* Model */,
 				F275371E2228440000AEF6B2 /* Module */,
 				F27536ED222841F000AEF6B2 /* AppDelegate.swift */,
@@ -192,11 +193,18 @@
 			isa = PBXGroup;
 			children = (
 				F2753728222846D100AEF6B2 /* PinModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F2E28790223C4786001B3287 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
 				F2E28786223BF14F001B3287 /* FlickrSearchModel.swift */,
 				F2E28788223BF22A001B3287 /* FlickrPhotosModel.swift */,
 				F2E2878A223BF280001B3287 /* FlickrPhotoModel.swift */,
 			);
-			path = Model;
+			path = UseCases;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

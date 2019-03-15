@@ -24,7 +24,7 @@ class PhotoRequestTests: XCTestCase {
             do {
                 var json = try JSONDecoder().decode(FlickrSearchModel.self, from: data)
                 print(json)
-            } catch let jsonErr {
+            } catch {
                 XCTFail()
             }
             promise.fulfill()
