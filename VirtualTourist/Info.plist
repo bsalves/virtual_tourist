@@ -41,5 +41,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>Flickr_API_Key</key>
+	<string>d40a75bcbf1b3747149032e5a4563eda</string>
+	<key>Flickr_API_Secret</key>
+	<string>cb3fe1f6b5da6165</string>
+	<key>Flickr_Photo_URL</key>
+	<string>https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}_q.jpg</string>
 </dict>
 </plist>

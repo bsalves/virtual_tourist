@@ -82,7 +82,7 @@ class MapViewController: UIViewController {
     }
     
     @objc private func recognizeLongPress(_ sender: UILongPressGestureRecognizer) {
-        if sender.state != UIGestureRecognizerState.began {
+        if sender.state != UIGestureRecognizer.State.began {
             return
         }
         let location = sender.location(in: map)

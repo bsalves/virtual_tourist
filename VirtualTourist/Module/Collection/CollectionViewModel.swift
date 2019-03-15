@@ -26,17 +26,17 @@ class CollectionViewModel: NSObject {
     }
     
     func loadPins() {
-        dataProvider.fetchData()
+        //dataProvider.fetchData()
     }
     
     func savePin(latitude: String, longitude: String) {
         let model = PinModel(coordinates: PinModel.Coordinates(latitude: latitude, longitude: longitude))
-        dataProvider.saveData(model)
+        //dataProvider.saveData(model)
     }
     
     func removePin(latitude: String, longitude: String) {
         let model = PinModel(coordinates: PinModel.Coordinates(latitude: latitude, longitude: longitude))
-        dataProvider.deleteData(model)
+        //dataProvider.deleteData(model)
     }
 }
 

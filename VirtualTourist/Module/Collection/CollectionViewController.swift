@@ -40,7 +40,7 @@ class CollectionViewController: UIViewController {
         point.coordinate = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
         map.addAnnotation(point)
         let zoomLocation = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
-        let viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 200, 200)
+        let viewRegion = MKCoordinateRegion(center: zoomLocation, latitudinalMeters: 200, longitudinalMeters: 200)
         map.setRegion(viewRegion, animated: false)
         map.selectAnnotation(point, animated: true)
     }
