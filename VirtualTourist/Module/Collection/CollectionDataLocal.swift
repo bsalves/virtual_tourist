@@ -8,8 +8,8 @@
 
 import Foundation
 
-class CollectionDataLocal: CollectionDataProvider {
+class CollectionDataLocal {
     
-    weak var delegate: CollectionDataProviderDelegate?
+//    /weak var delegate: CollectionDataProviderDelegate?
     
 }

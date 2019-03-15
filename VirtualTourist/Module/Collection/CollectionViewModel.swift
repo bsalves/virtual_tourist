@@ -9,37 +9,21 @@
 import Foundation
 
 protocol CollectionViewModelDelegate: class {
-    //func viewModel(_ viewModel: MapViewModel, didLoaded pins: [PinModel])
 }
 
-class CollectionViewModel: NSObject {
+class CollectionViewModel {
     
     weak var delegate: CollectionViewModelDelegate?
     
-    private lazy var dataProvider: CollectionDataProvider = {
-        return CollectionDataLocal()
-    }()
+    private lazy var remoteDataProvider =  CollectionDataRemote()
     
-    override init() {
-        super.init()
-        self.dataProvider.delegate = self
+    
+    init(pin: PinModel) {
+        
     }
     
-    func loadPins() {
-        //dataProvider.fetchData()
+    private func loadPhotos() {
+        //remoteDataProvider.fetchFlickrImage(with: <#T##FlickrPhotoModel#>, success: <#T##(Data) -> ()#>, fail: <#T##() -> ()#>)
     }
-    
-    func savePin(latitude: String, longitude: String) {
-        let model = PinModel(coordinates: PinModel.Coordinates(latitude: latitude, longitude: longitude))
-        //dataProvider.saveData(model)
-    }
-    
-    func removePin(latitude: String, longitude: String) {
-        let model = PinModel(coordinates: PinModel.Coordinates(latitude: latitude, longitude: longitude))
-        //dataProvider.deleteData(model)
-    }
-}
-
-extension CollectionViewModel: CollectionDataProviderDelegate {
     
 }

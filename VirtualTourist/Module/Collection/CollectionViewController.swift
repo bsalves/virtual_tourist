@@ -18,12 +18,18 @@ class CollectionViewController: UIViewController {
     // MARK: Properties
     
     public var coordinate: CLLocationCoordinate2D?
+    private var pinModel: PinModel?
+    private var viewModel: CollectionViewModel!
     
     // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         map.delegate = self
+        
+        let pin = PinModel(coordinates: PinModel.Coordinates(latitude: String(describing: coordinate?.latitude), longitude: String(describing: coordinate?.longitude)))
+        self.pinModel = pin
+        self.viewModel = CollectionViewModel(pin: pin)
     }
     
     override func viewWillAppear(_ animated: Bool) {
