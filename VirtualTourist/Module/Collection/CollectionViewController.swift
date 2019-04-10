@@ -14,6 +14,8 @@ class CollectionViewController: UIViewController {
     // MARK: Outlets
     
     @IBOutlet private(set) weak var map: MKMapView!
+    @IBOutlet private(set) weak var collection: UICollectionView!
+    @IBOutlet private(set) weak var collectionViewLayoutFlow: UICollectionViewFlowLayout!
     
     // MARK: Properties
     
@@ -25,11 +27,13 @@ class CollectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupCollectionView()
         map.delegate = self
         
         let pin = PinModel(coordinates: PinModel.Coordinates(latitude: String(describing: coordinate?.latitude), longitude: String(describing: coordinate?.longitude)))
         self.pinModel = pin
         self.viewModel = CollectionViewModel(pin: pin)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +42,14 @@ class CollectionViewController: UIViewController {
     }
     
     // MARK: Private methods
+    
+    private func setupCollectionView() {
+        collection.delegate = self
+        collection.dataSource = self
+        collectionViewLayoutFlow.scrollDirection = .vertical
+        collectionViewLayoutFlow.minimumLineSpacing = 1
+        collectionViewLayoutFlow.minimumInteritemSpacing = 1
+    }
     
     private func loadPinOnMap() {
         guard let coordinate = self.coordinate else { return }
