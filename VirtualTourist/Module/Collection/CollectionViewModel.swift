@@ -22,8 +22,6 @@ class CollectionViewModel {
         
     }
     
-    private func loadPhotos() {
-        //remoteDataProvider.fetchFlickrImage(with: <#T##FlickrPhotoModel#>, success: <#T##(Data) -> ()#>, fail: <#T##() -> ()#>)
-    }
+    
     
 }
