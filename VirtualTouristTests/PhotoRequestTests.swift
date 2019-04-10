@@ -12,8 +12,8 @@ import XCTest
 class PhotoRequestTests: XCTestCase {
     
     var remoteData = CollectionDataRemote()
-    var photoModel = FlickrPhotoModel(id: "40419480693", secret: "f624cca791", server: "7876", farm: 8)
-    var pinModel = PinModel(coordinates: PinModel.Coordinates(latitude: "-23.5489", longitude: "-46.6388"))
+    var photoModel = FlickrPhotoModel(id: "47568770471", secret: "030e624f14", server: "7806", farm: 8)
+    var pinModel = PinModel(coordinates: PinModel.Coordinates(latitude: "-23.5349283592817", longitude: "-46.7074641683413"))
     
     
     func testFetchImages() {

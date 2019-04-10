@@ -103,13 +103,17 @@ extension MapViewController: MKMapViewDelegate {
             viewModel.removePin(latitude: String(describing: annotation.coordinate.latitude), longitude: String(describing: annotation.coordinate.longitude))
         } else {
             self.coordinatesToPass = view.annotation?.coordinate
-            performSegue(withIdentifier: "collectionSegue", sender: nil)
+            self.viewModel.loadPhotos(PinModel(coordinates: PinModel.Coordinates(latitude: String(describing: coordinatesToPass?.latitude), longitude: String(describing: coordinatesToPass?.longitude))))
             map.deselectAnnotation(view.annotation, animated: true)
         }
     }
 }
 
 extension MapViewController: MapViewModelDelegate {
+    func viewModel(_ viewModel: MapViewModel, didLoaded photos: FlickrSearchModel) {
+        performSegue(withIdentifier: "collectionSegue", sender: nil)
+    }
+    
     func viewModel(_ viewModel: MapViewModel, didLoaded pins: [PinModel]) {
         self.clearAllPins()
         pins.forEach { (pin) in

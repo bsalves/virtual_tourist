@@ -28,11 +28,10 @@ class CollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
-        map.delegate = self
         
         let pin = PinModel(coordinates: PinModel.Coordinates(latitude: String(describing: coordinate?.latitude), longitude: String(describing: coordinate?.longitude)))
         self.pinModel = pin
-        self.viewModel = CollectionViewModel(pin: pin)
+//        self.viewModel = CollectionViewModel(pin: pin)
         
     }
     
@@ -61,10 +60,5 @@ class CollectionViewController: UIViewController {
         map.setRegion(viewRegion, animated: false)
         map.selectAnnotation(point, animated: true)
     }
-    
-    
-}
-
-extension CollectionViewController: MKMapViewDelegate {
     
 }

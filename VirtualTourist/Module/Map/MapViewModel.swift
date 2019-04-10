@@ -10,28 +10,46 @@ import Foundation
 
 protocol MapViewModelDelegate: class {
     func viewModel(_ viewModel: MapViewModel, didLoaded pins: [PinModel])
+    func viewModel(_ viewModel: MapViewModel, didLoaded photos: FlickrSearchModel)
 }
 
 class MapViewModel: NSObject {
     
     weak var delegate: MapViewModelDelegate?
+    private lazy var remoteData = CollectionDataRemote()
     
-    private lazy var dataProvider: MapDataProvider = {
-        return MapDataLocal()
-    }()
+    private lazy var dataProvider = MapDataLocal()
     
     override init() {
         super.init()
-        self.dataProvider.delegate = self
+        dataProvider.delegate = self
     }
     
     func loadPins() {
-        dataProvider.fetchData()
+        dataProvider.loadAllData()
+    }
+    
+    func loadPhotos(_ pin: PinModel) {
+        dataProvider.loadPhotosFromFlickr(pin)
     }
     
     func savePin(latitude: String, longitude: String) {
         let model = PinModel(coordinates: PinModel.Coordinates(latitude: latitude, longitude: longitude))
-        dataProvider.saveData(model)
+        
+        remoteData.fetchFlickrImages(with: model, success: { [weak self] (data) in
+            //success
+            do {
+                let searchResult = try JSONDecoder().decode(FlickrSearchModel.self, from: data)
+                self?.dataProvider.saveData(model, savePhotosFromSearchResults: searchResult)
+                //self?.collectionLocalData.saveData(searchResult,forPin: )
+            } catch {
+                //
+            }
+        }) {
+            //fail
+        }
+        
+        
     }
     
     func removePin(latitude: String, longitude: String) {
@@ -40,12 +58,15 @@ class MapViewModel: NSObject {
     }
 }
 
-extension MapViewModel: MapDataProviderDelegate {
-    func pinRemoved(_ remainingPins: [PinModel]) {
-        delegate?.viewModel(self, didLoaded: remainingPins)
+extension MapViewModel: MapDataLocalDelegate {
+    func photosLoaded(_ photos: FlickrSearchModel) {
+        delegate?.viewModel(self, didLoaded: photos)
     }
     
-    func mapData(_ mapData: MapDataProvider, didFinishedLoad pins: [PinModel]) {
+    func pinsLoaded(_ pins: [PinModel]) {
         delegate?.viewModel(self, didLoaded: pins)
     }
+    
+    
 }
+

@@ -10,43 +10,35 @@ import CoreData
 import UIKit
 
 class CollectionDataLocal {
+
     
-    private lazy var appDelegate = UIApplication.shared.delegate as? AppDelegate
-    private weak var managedContext: NSManagedObjectContext?
-    
-    init() {
-        self.managedContext = appDelegate?.persistentContainer.viewContext
-    }
-    
-    func saveData(_ searchResult: FlickrSearchModel) {
-        
-        guard let entity = NSEntityDescription.entity(forEntityName: "Pin", in: self.managedContext!) else { return }
-        guard let managedContext = self.managedContext else { return }
+    func saveData(_ searchResult: FlickrSearchModel, forPin: Pin) {
         
         searchResult.photos.photo.forEach { (photo) in
-            
-            let newPhoto = NSManagedObject(entity: entity, insertInto: managedContext)
-            newPhoto.setValue(photo.farm, forKey: "farm")
-            newPhoto.setValue(photo.id, forKey: "id")
-            newPhoto.setValue(photo.secret, forKey: "secret")
-            newPhoto.setValue(photo.server, forKey: "server")
-            newPhoto.setValue("\(photo.id)_\(photo.secret)_q.jpg", forKey: "fileName")
-            newPhoto.setValue(false, forKey: "hasSynced")
-            
-            do {
-                try managedContext.save()
-            } catch {
-                print("Error while trying to save data")
+            DispatchQueue.main.async {
+                let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+                
+                let newPhoto = Photo(context: context)
+                newPhoto.farm = Int16(photo.farm)
+                newPhoto.fileName = "\(photo.id)_\(photo.secret)_q.jpg"
+                newPhoto.hasSynced = false
+                newPhoto.secret = photo.secret
+                newPhoto.server = photo.server
+                newPhoto.id = photo.id
+                newPhoto.addToPin(forPin)
+                
+                (UIApplication.shared.delegate as! AppDelegate).saveContext()
             }
         }
     }
     
     func loadAllData(_ byPin: PinModel) -> FlickrSearchModel? {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Photo")
-        fetchRequest.predicate = NSPredicate(format: "ANY Pin.latitude == %@ AND Pin.longitude == %@", byPin.coordinates.latitude, byPin.coordinates.longitude)
+        fetchRequest.predicate = NSPredicate(format: "pin.latitude == %@ AND pin.longitude == %@", byPin.coordinates.latitude, byPin.coordinates.longitude)
         do {
             var values = [FlickrPhotoModel]()
-            let result = try self.managedContext?.fetch(fetchRequest)
+            let result = try context.fetch(fetchRequest)
             for data in result as! [NSManagedObject] {
                 values.append(FlickrPhotoModel(id: data.value(forKey: "id") as! String,
                                                secret: data.value(forKey: "secret") as! String,

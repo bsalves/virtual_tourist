@@ -22,7 +22,6 @@
 		F2753706222841F300AEF6B2 /* VirtualTouristTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2753705222841F300AEF6B2 /* VirtualTouristTests.swift */; };
 		F2753711222841F300AEF6B2 /* VirtualTouristUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2753710222841F300AEF6B2 /* VirtualTouristUITests.swift */; };
 		F27537222228449C00AEF6B2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27537212228449C00AEF6B2 /* MapViewController.swift */; };
-		F2753724222845A100AEF6B2 /* MapDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2753723222845A100AEF6B2 /* MapDataProvider.swift */; };
 		F2753726222845FE00AEF6B2 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2753725222845FE00AEF6B2 /* MapViewModel.swift */; };
 		F2753729222846D100AEF6B2 /* PinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2753728222846D100AEF6B2 /* PinModel.swift */; };
 		F2E28787223BF14F001B3287 /* FlickrSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E28786223BF14F001B3287 /* FlickrSearchModel.swift */; };
@@ -71,7 +70,6 @@
 		F2753710222841F300AEF6B2 /* VirtualTouristUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualTouristUITests.swift; sourceTree = "<group>"; };
 		F2753712222841F300AEF6B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F27537212228449C00AEF6B2 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		F2753723222845A100AEF6B2 /* MapDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDataProvider.swift; sourceTree = "<group>"; };
 		F2753725222845FE00AEF6B2 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		F2753728222846D100AEF6B2 /* PinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinModel.swift; sourceTree = "<group>"; };
 		F2E28786223BF14F001B3287 /* FlickrSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSearchModel.swift; sourceTree = "<group>"; };
@@ -188,7 +186,6 @@
 			isa = PBXGroup;
 			children = (
 				F27537212228449C00AEF6B2 /* MapViewController.swift */,
-				F2753723222845A100AEF6B2 /* MapDataProvider.swift */,
 				F2753725222845FE00AEF6B2 /* MapViewModel.swift */,
 				39591CE622359DBF000C30C3 /* MapDataLocal.swift */,
 			);
@@ -358,7 +355,6 @@
 				39591CED2235C69E000C30C3 /* CollectionDataLocal.swift in Sources */,
 				39591CE522359A72000C30C3 /* CollectionViewModel.swift in Sources */,
 				F27536F6222841F000AEF6B2 /* VirtualTourist.xcdatamodeld in Sources */,
-				F2753724222845A100AEF6B2 /* MapDataProvider.swift in Sources */,
 				F2E28787223BF14F001B3287 /* FlickrSearchModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
