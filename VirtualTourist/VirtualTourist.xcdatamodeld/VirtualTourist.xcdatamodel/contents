@@ -7,7 +7,7 @@
         <attribute name="photo" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="secret" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="server" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="pin" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Pin" inverseName="photo" inverseEntity="Pin" syncable="YES"/>
+        <relationship name="pin" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="Pin" inverseName="photo" inverseEntity="Pin" syncable="YES"/>
     </entity>
     <entity name="Pin" representedClassName="Pin" syncable="YES" codeGenerationType="class">
         <attribute name="latitude" optional="YES" attributeType="String" syncable="YES"/>

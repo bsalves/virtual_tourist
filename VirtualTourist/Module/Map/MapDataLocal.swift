@@ -11,6 +11,7 @@ import UIKit
 
 protocol MapDataLocalDelegate: class {
     func pinsLoaded(_ pins: [PinModel])
+    func pinRemoved()
     func photosLoaded(_ photos: FlickrSearchModel)
 }
 
@@ -43,7 +44,7 @@ class MapDataLocal {
         }
     }
     
-    func loadAllData() -> [PinModel] {
+    func loadAllData() {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Pin")
         var pin = [PinModel]()
         do {
@@ -55,7 +56,6 @@ class MapDataLocal {
         } catch {
             print("Failed")
         }
-        return pin
     }
     
     func loadPhotosFromFlickr(_ pinModel: PinModel) {
@@ -78,6 +78,7 @@ class MapDataLocal {
             
             do{
                 try managedContext?.save()
+                self.delegate?.pinRemoved()
                 //self.delegate?.pinRemoved(self.loadAllData())
                 return
             } catch {

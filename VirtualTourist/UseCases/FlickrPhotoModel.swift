@@ -14,5 +14,6 @@ struct FlickrPhotoModel: Codable {
     var secret: String
     var server: String
     var farm: Int
+    var photo: Data?
     
 }

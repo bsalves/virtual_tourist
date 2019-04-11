@@ -11,6 +11,7 @@ import UIKit
 
 class CollectionDataLocal {
 
+    lazy private var remote = CollectionDataRemote()
     
     func preparePhotosToBeSaved(_ searchResult: FlickrSearchModel) -> [Photo] {
         
@@ -30,20 +31,54 @@ class CollectionDataLocal {
         return photosToBeSaved
     }
     
+    func delete(photo: FlickrPhotoModel, deleted: () -> (), failed: () -> ()) {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Photo")
+        fetchRequest.predicate = NSPredicate(format: "ANY id = %@", photo.id)
+        do {
+            let result = try context.fetch(fetchRequest)
+            result.forEach { (item) in
+                let objectToDelete = item as! NSManagedObject
+                context.delete(objectToDelete)
+                deleted()
+            }
+        } catch {
+            print("Failed")
+            failed()
+        }
+    }
+    
+    func persistImage(_ photo: FlickrPhotoModel, imageData: Data) {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Photo")
+        fetchRequest.predicate = NSPredicate(format: "ANY id = %@", photo.id)
+        
+        do {
+            let result = try context.fetch(fetchRequest)
+            result.forEach { (item) in
+                let objectToUpdate = item as! Photo
+                objectToUpdate.photo = imageData
+                (UIApplication.shared.delegate as! AppDelegate).saveContext()
+            }
+        } catch {
+            print("Failed")
+        }
+    }
+    
     func loadAllData(_ pinModel: PinModel) -> FlickrSearchModel? {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Photo")
-        fetchRequest.predicate = NSPredicate(format: "ANY pin.latitude = %@", pinModel.coordinates.latitude)
+        fetchRequest.predicate = NSPredicate(format: "ANY pin.latitude = %@ AND pin.longitude = %@", pinModel.coordinates.latitude, pinModel.coordinates.longitude)
         do {
             var values = [FlickrPhotoModel]()
             let result = try context.fetch(fetchRequest)
             
             for data in result as! [NSManagedObject] {
-                
                 values.append(FlickrPhotoModel(id: data.value(forKey: "id") as! String,
                                                secret: data.value(forKey: "secret") as! String,
                                                server: data.value(forKey: "server") as! String,
-                                               farm: data.value(forKey: "farm") as! Int))
+                                               farm: data.value(forKey: "farm") as! Int,
+                                               photo: data.value(forKey: "photo") as? Data))
                 
             }
             return FlickrSearchModel(photos: FlickrPhotosModel(photo: values))

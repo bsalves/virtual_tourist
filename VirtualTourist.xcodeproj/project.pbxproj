@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3933D48C225EBF1200E6490B /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3933D48B225EBF1200E6490B /* UIImageView+Extension.swift */; };
 		39591CE122359A53000C30C3 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39591CE022359A53000C30C3 /* CollectionViewController.swift */; };
-		39591CE522359A72000C30C3 /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39591CE422359A72000C30C3 /* CollectionViewModel.swift */; };
 		39591CE722359DBF000C30C3 /* MapDataLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39591CE622359DBF000C30C3 /* MapDataLocal.swift */; };
 		39591CEB2235A906000C30C3 /* PinsLocalDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39591CEA2235A906000C30C3 /* PinsLocalDataTests.swift */; };
 		39591CED2235C69E000C30C3 /* CollectionDataLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39591CEC2235C69E000C30C3 /* CollectionDataLocal.swift */; };
@@ -52,7 +51,6 @@
 /* Begin PBXFileReference section */
 		3933D48B225EBF1200E6490B /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		39591CE022359A53000C30C3 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
-		39591CE422359A72000C30C3 /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
 		39591CE622359DBF000C30C3 /* MapDataLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDataLocal.swift; sourceTree = "<group>"; };
 		39591CEA2235A906000C30C3 /* PinsLocalDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsLocalDataTests.swift; sourceTree = "<group>"; };
 		39591CEC2235C69E000C30C3 /* CollectionDataLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDataLocal.swift; sourceTree = "<group>"; };
@@ -110,7 +108,6 @@
 			isa = PBXGroup;
 			children = (
 				39591CE022359A53000C30C3 /* CollectionViewController.swift */,
-				39591CE422359A72000C30C3 /* CollectionViewModel.swift */,
 				39591CEC2235C69E000C30C3 /* CollectionDataLocal.swift */,
 				F2E2878C223BF83E001B3287 /* CollectionDataRemote.swift */,
 				395C7F82225D8A6600147AA4 /* CollectionViewController+Collection.swift */,
@@ -357,7 +354,6 @@
 				3933D48C225EBF1200E6490B /* UIImageView+Extension.swift in Sources */,
 				39591CE122359A53000C30C3 /* CollectionViewController.swift in Sources */,
 				39591CED2235C69E000C30C3 /* CollectionDataLocal.swift in Sources */,
-				39591CE522359A72000C30C3 /* CollectionViewModel.swift in Sources */,
 				F27536F6222841F000AEF6B2 /* VirtualTourist.xcdatamodeld in Sources */,
 				F2E28787223BF14F001B3287 /* FlickrSearchModel.swift in Sources */,
 			);

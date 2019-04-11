@@ -41,7 +41,6 @@ class MapViewModel: NSObject {
             do {
                 let searchResult = try JSONDecoder().decode(FlickrSearchModel.self, from: data)
                 self?.dataProvider.saveData(model, savePhotosFromSearchResults: searchResult)
-                //self?.collectionLocalData.saveData(searchResult,forPin: )
             } catch {
                 //
             }
@@ -59,6 +58,10 @@ class MapViewModel: NSObject {
 }
 
 extension MapViewModel: MapDataLocalDelegate {
+    func pinRemoved() {
+        self.loadPins()
+    }
+    
     func photosLoaded(_ photos: FlickrSearchModel) {
         delegate?.viewModel(self, didLoaded: photos)
     }
@@ -66,7 +69,5 @@ extension MapViewModel: MapDataLocalDelegate {
     func pinsLoaded(_ pins: [PinModel]) {
         delegate?.viewModel(self, didLoaded: pins)
     }
-    
-    
 }
 

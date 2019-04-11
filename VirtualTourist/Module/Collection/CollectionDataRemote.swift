@@ -10,6 +10,8 @@ import Foundation
 
 class CollectionDataRemote {
     
+    lazy var localData = CollectionDataLocal()
+    
     private var flickrImageStringUrl: String? {
         var dictionary: NSDictionary?
         if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {

@@ -9,6 +9,7 @@
 import UIKit
 
 extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let photos = self.photos else { return 0 }
         return photos.photos.photo.count
@@ -16,17 +17,36 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let photos = self.photos else { return UICollectionViewCell() }
-        
+        let item = photos.photos.photo[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as! PhotoCollectionViewCell
         
-        DispatchQueue.global().async { [weak self] in
-            self?.remote.fetchFlickrImage(with: photos.photos.photo[indexPath.row], success: { (imageData) in
-                cell.imageView.image = UIImage(data: imageData)
+        if let photoDataPersisted = item.photo {
+            cell.activityIndicator.stopAnimating()
+            cell.imageView.image = UIImage(data: photoDataPersisted)
+        } else {
+            remote.fetchFlickrImage(with: item, success: { [weak self] (imageData) in
+                DispatchQueue.main.async {
+                    cell.activityIndicator.stopAnimating()
+                    cell.imageView.image = UIImage(data: imageData)
+                    self?.local.persistImage(item, imageData: imageData)
+                }
             }) {
                 // fail
             }
         }
+        
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let photos = self.photos else { return }
+        
+        local.delete(photo: photos.photos.photo[indexPath.row], deleted: {
+            self.photos?.photos.photo.remove(at: indexPath.row)
+            collectionView.reloadData()
+        }) {
+            //failed
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
