@@ -16,6 +16,7 @@ class CollectionViewController: UIViewController {
     @IBOutlet private(set) weak var map: MKMapView!
     @IBOutlet private(set) weak var collection: UICollectionView!
     @IBOutlet private(set) weak var collectionViewLayoutFlow: UICollectionViewFlowLayout!
+    @IBOutlet private(set) weak var newCollectionButton: UIBarButtonItem!
     
     // MARK: Properties
     
@@ -24,22 +25,43 @@ class CollectionViewController: UIViewController {
     private var pinModel: PinModel?
     lazy var remote = CollectionDataRemote()
     lazy var local = CollectionDataLocal()
+    var downloadStack = DispatchGroup()
     
     // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
-        
-        let pin = PinModel(coordinates: PinModel.Coordinates(latitude: String(describing: coordinate?.latitude), longitude: String(describing: coordinate?.longitude)))
+        guard let coordinates = self.coordinate else {
+            self.navigationController?.popViewController(animated: true)
+            return
+        }
+        let pin = PinModel(coordinates: PinModel.Coordinates(latitude: String(describing: coordinates.latitude), longitude: String(describing: coordinates.longitude)))
         self.pinModel = pin
-//        self.viewModel = CollectionViewModel(pin: pin)
         
+        downloadStack.notify(queue: DispatchQueue.main) { [unowned self] in
+            self.newCollectionButton.isEnabled = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadPinOnMap()
+    }
+    
+    // MARK: Actions
+    
+    @IBAction func refetchAlbum(_ sender: Any) {
+        guard let model = pinModel else { return }
+        self.photos = nil
+        collection.reloadData()
+        self.local.reloadAlbum(model) { (result) in
+            self.photos = result
+            
+            DispatchQueue.main.async { [weak self] in
+                self?.collection.reloadData()
+            }
+        }
     }
     
     // MARK: Private methods

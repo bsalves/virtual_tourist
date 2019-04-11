@@ -11,7 +11,8 @@ import UIKit
 
 class CollectionDataLocal {
 
-    lazy private var remote = CollectionDataRemote()
+    private lazy var remote = CollectionDataRemote()
+    private lazy var dataProvider = MapDataLocal()
     
     func preparePhotosToBeSaved(_ searchResult: FlickrSearchModel) -> [Photo] {
         
@@ -63,6 +64,40 @@ class CollectionDataLocal {
         } catch {
             print("Failed")
         }
+    }
+    
+    private func deleteAllPhotos(_ pinModel: PinModel, deleted: @escaping () -> ()) {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Photo")
+        fetchRequest.predicate = NSPredicate(format: "ANY pin.latitude = %@ AND pin.longitude = %@", pinModel.coordinates.latitude, pinModel.coordinates.longitude)
+        do {
+            let result = try context.fetch(fetchRequest)
+            result.forEach { (item) in
+                let objectToDelete = item as! NSManagedObject
+                context.delete(objectToDelete)
+            }
+            deleted()
+        } catch {
+            print("Failed")
+        }
+    }
+    
+    func reloadAlbum(_ pinModel: PinModel, loaded: @escaping (FlickrSearchModel?) -> ()) {
+        deleteAllPhotos(pinModel) { [weak self] in
+            self?.remote.fetchFlickrImages(with: pinModel, success: { [weak self] (data) in
+                do {
+                    let searchResult = try JSONDecoder().decode(FlickrSearchModel.self, from: data)
+                    self?.dataProvider.saveData(pinModel, savePhotosFromSearchResults: searchResult)
+                    let newData = self?.loadAllData(pinModel)
+                    loaded(newData)
+                } catch {
+                    //
+                }
+            }) {
+                //fail
+            }
+        }
+        
     }
     
     func loadAllData(_ pinModel: PinModel) -> FlickrSearchModel? {

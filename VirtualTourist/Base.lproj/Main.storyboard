@@ -99,7 +99,11 @@
                                 </constraints>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="cqP-0c-hXA"/>
-                                    <barButtonItem title="New Collection" id="EiI-EL-vw8"/>
+                                    <barButtonItem enabled="NO" title="New Collection" id="EiI-EL-vw8">
+                                        <connections>
+                                            <action selector="refetchAlbum:" destination="9ru-bS-CtK" id="1O9-5l-sAN"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="dKR-68-ecx"/>
                                 </items>
                             </toolbar>
@@ -163,6 +167,7 @@
                         <outlet property="collection" destination="Kp3-mV-R4C" id="xe4-qg-ZcK"/>
                         <outlet property="collectionViewLayoutFlow" destination="CzQ-bR-9A5" id="rqU-g3-qWZ"/>
                         <outlet property="map" destination="HMv-3w-8ua" id="jrJ-4e-vzv"/>
+                        <outlet property="newCollectionButton" destination="EiI-EL-vw8" id="WqO-RN-EZr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="krA-zt-dIB" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -16,22 +16,31 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let photos = self.photos else { return UICollectionViewCell() }
+        
+        downloadStack.enter()
+        guard let photos = self.photos else {
+            downloadStack.leave()
+            return UICollectionViewCell()
+        }
+        
         let item = photos.photos.photo[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as! PhotoCollectionViewCell
         
         if let photoDataPersisted = item.photo {
             cell.activityIndicator.stopAnimating()
             cell.imageView.image = UIImage(data: photoDataPersisted)
+            downloadStack.leave()
         } else {
             remote.fetchFlickrImage(with: item, success: { [weak self] (imageData) in
                 DispatchQueue.main.async {
                     cell.activityIndicator.stopAnimating()
                     cell.imageView.image = UIImage(data: imageData)
                     self?.local.persistImage(item, imageData: imageData)
+                    self?.downloadStack.leave()
                 }
-            }) {
+            }) { [weak self] in
                 // fail
+                self?.downloadStack.leave()
             }
         }
         
