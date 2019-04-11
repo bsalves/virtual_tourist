@@ -3,16 +3,16 @@
     <entity name="Photo" representedClassName="Photo" syncable="YES" codeGenerationType="class">
         <attribute name="farm" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="fileName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="hasSynced" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photo" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="secret" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="server" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="pin" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Pin" inverseName="photo" inverseEntity="Pin" syncable="YES"/>
+        <relationship name="pin" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Pin" inverseName="photo" inverseEntity="Pin" syncable="YES"/>
     </entity>
     <entity name="Pin" representedClassName="Pin" syncable="YES" codeGenerationType="class">
         <attribute name="latitude" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="photo" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Photo" inverseName="pin" inverseEntity="Photo" syncable="YES"/>
+        <relationship name="photo" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Photo" inverseName="pin" inverseEntity="Photo" syncable="YES"/>
     </entity>
     <elements>
         <element name="Photo" positionX="-54" positionY="-9" width="128" height="150"/>

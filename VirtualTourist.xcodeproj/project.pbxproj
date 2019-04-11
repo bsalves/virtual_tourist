@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3933D48C225EBF1200E6490B /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3933D48B225EBF1200E6490B /* UIImageView+Extension.swift */; };
 		39591CE122359A53000C30C3 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39591CE022359A53000C30C3 /* CollectionViewController.swift */; };
 		39591CE522359A72000C30C3 /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39591CE422359A72000C30C3 /* CollectionViewModel.swift */; };
 		39591CE722359DBF000C30C3 /* MapDataLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39591CE622359DBF000C30C3 /* MapDataLocal.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3933D48B225EBF1200E6490B /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		39591CE022359A53000C30C3 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		39591CE422359A72000C30C3 /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
 		39591CE622359DBF000C30C3 /* MapDataLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDataLocal.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				F27536F9222841F300AEF6B2 /* LaunchScreen.storyboard */,
 				F27536FC222841F300AEF6B2 /* Info.plist */,
 				F27536F4222841F000AEF6B2 /* VirtualTourist.xcdatamodeld */,
+				3933D48B225EBF1200E6490B /* UIImageView+Extension.swift */,
 			);
 			path = VirtualTourist;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				39591CE722359DBF000C30C3 /* MapDataLocal.swift in Sources */,
 				F27537222228449C00AEF6B2 /* MapViewController.swift in Sources */,
 				395C7F85225D8FDC00147AA4 /* PhotoCollectionViewCell.swift in Sources */,
+				3933D48C225EBF1200E6490B /* UIImageView+Extension.swift in Sources */,
 				39591CE122359A53000C30C3 /* CollectionViewController.swift in Sources */,
 				39591CED2235C69E000C30C3 /* CollectionDataLocal.swift in Sources */,
 				39591CE522359A72000C30C3 /* CollectionViewModel.swift in Sources */,

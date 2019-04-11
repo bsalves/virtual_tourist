@@ -24,18 +24,18 @@ class CollectionViewModel {
 //
 //    }
     
-    func loadPhoto(withPlace: PinModel) {
-        remoteData.fetchFlickrImages(with: withPlace, success: { (data) in
-            //success
-            do {
-                var json = try JSONDecoder().decode(FlickrSearchModel.self, from: data)
-                print(json)
-            } catch {
-                //XCTFail()
-            }
-        }) {
-            //fail
-        }
-    }
+//    func loadPhoto(withPlace: PinModel) {
+//        remoteData.fetchFlickrImages(with: withPlace, success: { (data) in
+//            //success
+//            do {
+//                var json = try JSONDecoder().decode(FlickrSearchModel.self, from: data)
+//                print(json)
+//            } catch {
+//                //XCTFail()
+//            }
+//        }) {
+//            //fail
+//        }
+//    }
     
 }

@@ -10,12 +10,22 @@ import UIKit
 
 extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        guard let photos = self.photos else { return 0 }
+        return photos.photos.photo.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let photos = self.photos else { return UICollectionViewCell() }
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as! PhotoCollectionViewCell
-        cell.imageView.image = UIImage(named: "sample")
+        
+        DispatchQueue.global().async { [weak self] in
+            self?.remote.fetchFlickrImage(with: photos.photos.photo[indexPath.row], success: { (imageData) in
+                cell.imageView.image = UIImage(data: imageData)
+            }) {
+                // fail
+            }
+        }
         return cell
     }
     

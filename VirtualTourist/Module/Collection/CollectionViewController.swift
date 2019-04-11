@@ -20,8 +20,11 @@ class CollectionViewController: UIViewController {
     // MARK: Properties
     
     public var coordinate: CLLocationCoordinate2D?
+    public var photos: FlickrSearchModel?
     private var pinModel: PinModel?
     private var viewModel: CollectionViewModel!
+    lazy var remote = CollectionDataRemote()
+    
     
     // MARK: Lifecycle
     

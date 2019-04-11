@@ -22,6 +22,8 @@ class MapViewController: UIViewController {
     
     private var viewModel = MapViewModel()
     private var coordinatesToPass: CLLocationCoordinate2D?
+    private var photos: FlickrSearchModel?
+    
     private var isEditingMode = false {
         didSet {
             toggleEditingMode()
@@ -47,6 +49,7 @@ class MapViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let collectionViewController = segue.destination as? CollectionViewController {
             collectionViewController.coordinate = self.coordinatesToPass
+            collectionViewController.photos = self.photos
         }
     }
     
@@ -102,8 +105,9 @@ extension MapViewController: MKMapViewDelegate {
             }
             viewModel.removePin(latitude: String(describing: annotation.coordinate.latitude), longitude: String(describing: annotation.coordinate.longitude))
         } else {
-            self.coordinatesToPass = view.annotation?.coordinate
-            self.viewModel.loadPhotos(PinModel(coordinates: PinModel.Coordinates(latitude: String(describing: coordinatesToPass?.latitude), longitude: String(describing: coordinatesToPass?.longitude))))
+            guard let coordinates = view.annotation?.coordinate else { return }
+            self.coordinatesToPass = coordinates
+            self.viewModel.loadPhotos(PinModel(coordinates: PinModel.Coordinates(latitude: String(describing: coordinates.latitude), longitude: String(describing: coordinates.longitude))))
             map.deselectAnnotation(view.annotation, animated: true)
         }
     }
@@ -111,6 +115,7 @@ extension MapViewController: MKMapViewDelegate {
 
 extension MapViewController: MapViewModelDelegate {
     func viewModel(_ viewModel: MapViewModel, didLoaded photos: FlickrSearchModel) {
+        self.photos = photos
         performSegue(withIdentifier: "collectionSegue", sender: nil)
     }
     
