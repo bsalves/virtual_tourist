@@ -48,6 +48,6 @@
 	<key>Flickr_Photo_URL</key>
 	<string>https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}_q.jpg</string>
 	<key>Flickr_Photos_URL</key>
-	<string>https://api.flickr.com/services/rest/?method=flickr.photos.search&amp;api_key=d40a75bcbf1b3747149032e5a4563eda&amp;per_page=20&amp;format=json&amp;nojsoncallback=1&amp;lat={lat}&amp;lon={lon}</string>
+	<string>https://api.flickr.com/services/rest/?method=flickr.photos.search&amp;api_key=d40a75bcbf1b3747149032e5a4563eda&amp;per_page=20&amp;format=json&amp;nojsoncallback=1&amp;lat={lat}&amp;lon={lon}&amp;per_page=21&amp;radius=10</string>
 </dict>
 </plist>

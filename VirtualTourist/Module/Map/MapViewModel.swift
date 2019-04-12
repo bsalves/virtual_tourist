@@ -43,9 +43,11 @@ class MapViewModel: NSObject {
                 self?.dataProvider.saveData(model, savePhotosFromSearchResults: searchResult)
             } catch {
                 //
+                print(error)
             }
         }) {
             //fail
+            print("failed to fetch flickr images")
         }
         
         

@@ -16,7 +16,6 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         downloadStack.enter()
         guard let photos = self.photos else {
             downloadStack.leave()

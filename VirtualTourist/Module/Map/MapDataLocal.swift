@@ -26,7 +26,6 @@ class MapDataLocal {
             let newPin = Pin(context: context)
             newPin.latitude = mapData.coordinates.latitude
             newPin.longitude = mapData.coordinates.longitude
-            
             self.collectionLocalData.preparePhotosToBeSaved(savePhotosFromSearchResults).forEach({ (photo) in
                 newPin.addToPhoto(photo)
             })
