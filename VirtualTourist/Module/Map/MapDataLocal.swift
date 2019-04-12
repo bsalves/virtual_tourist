@@ -18,29 +18,19 @@ protocol MapDataLocalDelegate: class {
 class MapDataLocal {
     
     weak var delegate: MapDataLocalDelegate?
-    private lazy var appDelegate = UIApplication.shared.delegate as? AppDelegate
-    private weak var managedContext: NSManagedObjectContext?
     private lazy var collectionLocalData = CollectionDataLocal()
     
-    init() {
-        self.managedContext = appDelegate?.persistentContainer.viewContext
-    }
-    
     func saveData(_ mapData: PinModel, savePhotosFromSearchResults: FlickrSearchModel) {
-        
-        DispatchQueue.main.async { [unowned self] in
+        DispatchQueue.main.async {
             let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
             let newPin = Pin(context: context)
             newPin.latitude = mapData.coordinates.latitude
             newPin.longitude = mapData.coordinates.longitude
             
-            
             self.collectionLocalData.preparePhotosToBeSaved(savePhotosFromSearchResults).forEach({ (photo) in
                 newPin.addToPhoto(photo)
             })
-            
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
-            
         }
     }
     
@@ -48,7 +38,8 @@ class MapDataLocal {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Pin")
         var pin = [PinModel]()
         do {
-            let result = try self.managedContext?.fetch(fetchRequest)
+            let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
+            let result = try context?.fetch(fetchRequest)
             for data in result as! [NSManagedObject] {
                 pin.append(PinModel(coordinates: PinModel.Coordinates(latitude: data.value(forKey: "latitude") as! String, longitude: data.value(forKey: "longitude") as! String)))
             }
@@ -69,17 +60,16 @@ class MapDataLocal {
         fetchRequest.fetchLimit = 1
         
         do {
-            guard let data = try managedContext?.fetch(fetchRequest) else { return }
-            
+            let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
+            guard let data = try context?.fetch(fetchRequest) else { return }
             data.forEach { (item) in
                 let objectToDelete = item as! NSManagedObject
-                self.managedContext?.delete(objectToDelete)
+                context?.delete(objectToDelete)
             }
             
             do{
-                try managedContext?.save()
+                try context?.save()
                 self.delegate?.pinRemoved()
-                //self.delegate?.pinRemoved(self.loadAllData())
                 return
             } catch {
                 print(error)
@@ -87,6 +77,20 @@ class MapDataLocal {
             
         } catch {
             print(error)
+        }
+    }
+    
+    func loadPin(_ pinModel: PinModel) -> Pin? {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Pin")
+        fetchRequest.predicate = NSPredicate(format: "latitude = %@ AND longitude = %@", pinModel.coordinates.latitude, pinModel.coordinates.longitude)
+        fetchRequest.fetchLimit = 1
+        do {
+            let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
+            guard let data = try context?.fetch(fetchRequest) else { return nil }
+            return data[0] as? Pin
+        } catch {
+            print(error)
+            return nil
         }
     }
     

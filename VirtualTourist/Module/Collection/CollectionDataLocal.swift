@@ -16,10 +16,10 @@ class CollectionDataLocal {
     
     func preparePhotosToBeSaved(_ searchResult: FlickrSearchModel) -> [Photo] {
         
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         var photosToBeSaved = [Photo]()
         
         searchResult.photos.photo.forEach { (photo) in
-            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
             
             let newPhoto = Photo(context: context)
             newPhoto.farm = Int16(photo.farm)
@@ -66,38 +66,39 @@ class CollectionDataLocal {
         }
     }
     
-    private func deleteAllPhotos(_ pinModel: PinModel, deleted: @escaping () -> ()) {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Photo")
-        fetchRequest.predicate = NSPredicate(format: "ANY pin.latitude = %@ AND pin.longitude = %@", pinModel.coordinates.latitude, pinModel.coordinates.longitude)
-        do {
-            let result = try context.fetch(fetchRequest)
-            result.forEach { (item) in
-                let objectToDelete = item as! NSManagedObject
-                context.delete(objectToDelete)
+    func reloadAlbum(_ pinModel: PinModel, loaded: @escaping (FlickrSearchModel?) -> ()) {
+        
+        // delete pin
+        dataProvider.deleteData(pinModel)
+        
+        self.remote.fetchFlickrImages(with: pinModel, success: { [weak self] (data) in
+            do {
+                let searchResult = try JSONDecoder().decode(FlickrSearchModel.self, from: data)
+                
+                // new pin
+                self?.dataProvider.saveData(pinModel, savePhotosFromSearchResults: searchResult)
+                
+                loaded(searchResult)
+            } catch {
+                //
+                print(error)
             }
-            deleted()
-        } catch {
-            print("Failed")
+        }) {
+            //fail
+            print("erro no fetch images from flickr")
         }
     }
     
-    func reloadAlbum(_ pinModel: PinModel, loaded: @escaping (FlickrSearchModel?) -> ()) {
-        deleteAllPhotos(pinModel) { [weak self] in
-            self?.remote.fetchFlickrImages(with: pinModel, success: { [weak self] (data) in
-                do {
-                    let searchResult = try JSONDecoder().decode(FlickrSearchModel.self, from: data)
-                    self?.dataProvider.saveData(pinModel, savePhotosFromSearchResults: searchResult)
-                    let newData = self?.loadAllData(pinModel)
-                    loaded(newData)
-                } catch {
-                    //
-                }
-            }) {
-                //fail
+    func savePhotosToPin(_ pin: Pin, photos: [Photo]) {
+        photos.forEach { (photo) in
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            pin.addToPhoto(photo)
+            do {
+                try context.save()
+            } catch {
+                print(error)
             }
         }
-        
     }
     
     func loadAllData(_ pinModel: PinModel) -> FlickrSearchModel? {

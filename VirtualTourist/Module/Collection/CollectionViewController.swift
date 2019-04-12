@@ -74,6 +74,15 @@ class CollectionViewController: UIViewController {
         collectionViewLayoutFlow.minimumInteritemSpacing = 1
     }
     
+//    private func loadPhotos() {
+//        guard let pin = pinModel else {
+//            navigationController?.popViewController(animated: true)
+//            return
+//        }
+//        self.photos = local.loadAllData(pin)
+//        collection.reloadData()
+//    }
+    
     private func loadPinOnMap() {
         guard let coordinate = self.coordinate else { return }
         
