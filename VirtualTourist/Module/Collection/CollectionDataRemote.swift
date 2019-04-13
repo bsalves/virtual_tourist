@@ -36,7 +36,7 @@ class CollectionDataRemote {
             
             urlString = urlString.replacingOccurrences(of: "{lat}", with: String(describing: pin.coordinates.latitude))
             urlString = urlString.replacingOccurrences(of: "{lon}", with: String(describing: pin.coordinates.longitude))
-            urlString = urlString.replacingOccurrences(of: "{page}", with: String(describing: arc4random_uniform(999)))
+            urlString = urlString.replacingOccurrences(of: "{page}", with: String(describing: arc4random_uniform(99)))
             
             guard let url = URL(string: urlString) else {
                 return
